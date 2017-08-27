@@ -55,11 +55,11 @@ namespace cnl {
                    : (C >= 'a' && C <= 'f')
                      ? C - 'a'
                      : (C >= 'A' && C <= 'F')
-                       ? C - 'A'
+                       ? C - 'A' :
 #if defined(CNL_EXCEPTIONS_ENABLED)
-                       : throw std::out_of_range("only decimal digits are allowed")
+                       throw std::out_of_range("only decimal digits are allowed")
 #else
-                : 0
+                0
 #endif
                     ;
         }

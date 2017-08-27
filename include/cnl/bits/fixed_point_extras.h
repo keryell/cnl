@@ -122,7 +122,7 @@ namespace cnl {
                 crib(fixed_point<Rep, Exponent> const& x) noexcept
                 {
                     using floating_point = _impl::fp::float_of_same_size<Rep>;
-                    return static_cast<fixed_point<Rep, Exponent>>(F(static_cast<floating_point>(x)));
+                    return static_cast<fixed_point<Rep, Exponent> >(F(static_cast<floating_point>(x)));
                 }
             }
         }

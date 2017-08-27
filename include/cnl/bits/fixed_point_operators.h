@@ -91,9 +91,9 @@ namespace cnl {
                 class Operator, class Lhs, class Rhs,
                 class = _impl::enable_if_t<Operator::is_comparison && cnl::_fixed_point_operators_impl::is_heterogeneous<Lhs, Rhs>()>>
         constexpr auto operate(Lhs const& lhs, Rhs const& rhs, Operator op)
-        -> decltype(op(static_cast<_impl::common_type_t<Lhs, Rhs>>(lhs), static_cast<_impl::common_type_t<Lhs, Rhs>>(rhs)))
+        -> decltype(op(static_cast<_impl::common_type_t<Lhs, Rhs> >(lhs), static_cast<_impl::common_type_t<Lhs, Rhs> >(rhs)))
         {
-            return op(static_cast<_impl::common_type_t<Lhs, Rhs>>(lhs), static_cast<_impl::common_type_t<Lhs, Rhs>>(rhs));
+            return op(static_cast<_impl::common_type_t<Lhs, Rhs> >(lhs), static_cast<_impl::common_type_t<Lhs, Rhs> >(rhs));
         };
 
         template<class Operator, class Rep, int Exponent, class = _impl::enable_if_t<Operator::is_comparison>>

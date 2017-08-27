@@ -234,7 +234,7 @@ namespace cnl {
                     Output, Input>::type;
 
             return (exp>-std::numeric_limits<larger>::digits)
-                   ? static_cast<Output>(_impl::scale<larger>(static_cast<larger>(i), 2, exp))
+                   ? static_cast<Output>(scale<larger>(static_cast<larger>(i), 2, exp))
                    : Output{0};
         }
 
@@ -255,14 +255,14 @@ namespace cnl {
                 }
 
                 template<class S, int Exponent, 
-                        enable_if_t<!(Exponent<=0) && (Exponent<8), int> Dummy = 0>
+                        enable_if_t<greater_than_tag(Exponent, 0) && less_than_tag(Exponent, 8), int> Dummy = 0>
                 constexpr S pow2()
                 {
                     static_assert(std::numeric_limits<S>::is_iec559, "S must be floating-point type");
                     return pow2<S, Exponent-1>()*S(2);
                 }
 
-                template<class S, int Exponent, enable_if_t<(Exponent>=8), int> Dummy = 0>
+                template<class S, int Exponent, enable_if_t<greater_than_or_equal_tag(Exponent, 8), int> Dummy = 0>
                 constexpr S pow2()
                 {
                     static_assert(std::numeric_limits<S>::is_iec559, "S must be floating-point type");
@@ -270,14 +270,14 @@ namespace cnl {
                 }
 
                 template<class S, int Exponent, 
-                        enable_if_t<!(Exponent>=0) && (Exponent>-8), int> Dummy = 0>
+                        enable_if_t<less_than_tag(Exponent, 0) && greater_than_tag(Exponent, -8), int> Dummy = 0>
                 constexpr S pow2()
                 {
                     static_assert(std::numeric_limits<S>::is_iec559, "S must be floating-point type");
                     return pow2<S, Exponent+1>()*S(.5);
                 }
 
-                template<class S, int Exponent, enable_if_t<(Exponent<=-8), int> Dummy = 0>
+                template<class S, int Exponent, enable_if_t<less_than_or_equal_tag(Exponent, -8), int> Dummy = 0>
                 constexpr S pow2()
                 {
                     static_assert(std::numeric_limits<S>::is_iec559, "S must be floating-point type");
